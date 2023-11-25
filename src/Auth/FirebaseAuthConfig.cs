@@ -16,9 +16,9 @@ namespace Firebase.Auth
     {
         private UserManager userManager;
 
-        public FirebaseAuthConfig()
+        public FirebaseAuthConfig(HttpClient httpClient = null)
         {
-            this.HttpClient = new HttpClient();
+            this.HttpClient = httpClient ?? new HttpClient();
             this.UserRepository = InMemoryRepository.Instance;
             this.Providers = Array.Empty<FirebaseAuthProvider>();
             this.JsonSettings = new JsonSerializerSettings
