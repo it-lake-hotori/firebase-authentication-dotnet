@@ -4,8 +4,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Firebase.Auth
 {
@@ -85,6 +87,8 @@ namespace Firebase.Auth
             get;
             set;
         }
+
+        public Func<Task<IEnumerable<(string name,string value)>>> CustomHeadersProvider { get; set; }
 
         /// <summary>
         /// Specifies the uri that oauth provider will navigate to to finish auth.

@@ -1,5 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +47,14 @@ namespace Firebase.Auth.Requests
                 {
                     Content = content
                 };
+
+                if(config.CustomHeadersProvider != null)
+                {
+                    foreach(var header in await config.CustomHeadersProvider())
+                    {
+                        message.Headers.Add(header.name, header.value);
+                    }
+                }
 
                 var httpResponse = await this.config.HttpClient.SendAsync(message).ConfigureAwait(false);
                 responseData = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
